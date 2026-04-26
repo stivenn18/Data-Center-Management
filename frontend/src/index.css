@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --void: #050a0e;
+  --panel: #080f14;
+  --surface: #0d1920;
+  --border: #0f3a4a;
+  --cyan: #06b6d4;
+  --cyan-bright: #22d3ee;
+  --alert: #ff4444;
+  --warn: #ffaa00;
+  --safe: #00ff88;
+  --text: #a8d8e8;
+  --text-dim: #4a7a8a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--void);
+  color: var(--text);
+  font-family: 'Exo 2', sans-serif;
+  overflow-x: hidden;
+}
+
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(6, 182, 212, 0.03) 50%,
+    transparent
+  );
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100px); }
+  100% { transform: translateY(110vh); }
+}
+
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--panel);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
+
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px currentColor; }
+  50% { box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+
+.critical-bg {
+  background: linear-gradient(135deg, #0d0505 0%, #1a0808 100%);
+  border-color: var(--alert) !important;
+}
+
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '█';
+  animation: cursor-blink 1s step-end infinite;
+  color: var(--cyan);
+}
+
+
+.hex-bg {
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, rgba(6,182,212,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0,255,136,0.03) 0%, transparent 40%);
+}
+
+
+.panel-border {
+  border: 1px solid var(--border);
+  box-shadow: inset 0 0 30px rgba(6,182,212,0.03), 0 0 1px rgba(6,182,212,0.2);
+}
+
+
+@keyframes alert-flash {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(255, 68, 68, 0.1); }
+}
+
+.alert-flash {
+  animation: alert-flash 0.8s ease-in-out infinite;
+}
+
+
+@keyframes data-stream {
+  0% { transform: translateY(100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(0%); opacity: 0; }
+}
+
+
+@keyframes counter {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.counter-animate {
+  animation: counter 0.3s ease-out;
+}
+
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+
+@keyframes line-appear {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.line-appear {
+  animation: line-appear 0.2s ease-out forwards;
+}
+
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+.grid-lines {
+  background-image: 
+    linear-gradient(rgba(15, 58, 74, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 58, 74, 0.3) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+
+.neon-text {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+}
+
+
+.corner-tl::before,
+.corner-br::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--cyan);
+  border-style: solid;
+}
+
+.corner-tl::before {
+  top: 0; left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.corner-br::after {
+  bottom: 0; right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+
+.metric-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  transition: left 0.5s ease;
+}
+
+.metric-card:hover::before {
+  left: 100%;
+}
+
+
+.btn-primary {
+  background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(6,182,212,0.1));
+  border: 1px solid rgba(6,182,212,0.5);
+  color: var(--cyan-bright);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, rgba(6,182,212,0.4), rgba(6,182,212,0.2));
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(6,182,212,0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, rgba(255,68,68,0.2), rgba(255,68,68,0.1));
+  border: 1px solid rgba(255,68,68,0.5);
+  color: #ff8888;
+  transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, rgba(255,68,68,0.4), rgba(255,68,68,0.2));
+  border-color: var(--alert);
+  box-shadow: 0 0 20px rgba(255,68,68,0.3);
+}
+
+.btn-warn {
+  background: linear-gradient(135deg, rgba(255,170,0,0.2), rgba(255,170,0,0.1));
+  border: 1px solid rgba(255,170,0,0.5);
+  color: #ffcc44;
+  transition: all 0.2s ease;
+}
+
+.btn-warn:hover {
+  background: linear-gradient(135deg, rgba(255,170,0,0.4), rgba(255,170,0,0.2));
+  border-color: var(--warn);
+  box-shadow: 0 0 20px rgba(255,170,0,0.3);
+}
+
+.btn-safe {
+  background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,255,136,0.1));
+  border: 1px solid rgba(0,255,136,0.5);
+  color: var(--safe);
+  transition: all 0.2s ease;
+}
+
+.btn-safe:hover {
+  background: linear-gradient(135deg, rgba(0,255,136,0.4), rgba(0,255,136,0.2));
+  border-color: var(--safe);
+  box-shadow: 0 0 20px rgba(0,255,136,0.3);
+}
+
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(15, 58, 74, 0.6) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px !important;
+}
