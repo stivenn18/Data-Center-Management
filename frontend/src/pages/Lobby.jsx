@@ -147,7 +147,7 @@ export default function Lobby() {
                     onClick={() => setRole('monitor')}
                     icon="◉"
                     title="MONITOR"
-                    description="Observa métricas, temperatura, ancho de banda e intentos de intrusión en tiempo real."
+                    description="Observa temperatura de racks, ancho de banda e intentos de intrusión DDoS en tiempo real."
                     color="cyan"
                   />
                   <RoleCard
@@ -155,7 +155,7 @@ export default function Lobby() {
                     onClick={() => setRole('technician')}
                     icon="⚙"
                     title="TÉCNICO"
-                    description="Ejecuta comandos: reinicia servidores, activa firewalls y controla el enfriamiento."
+                    description="Controla aires acondicionados, reinicia servidores y activa firewalls de emergencia."
                     color="yellow"
                   />
                 </div>
