@@ -17,8 +17,9 @@ Sistema asimétrico de gestión de crisis para Data Centers en tiempo real. Dos 
 
 **Gestión de Data Center** es una aplicación web multijugador asimétrica donde:
 
-- El **Monitor** tiene acceso de solo lectura: ve temperatura de racks, ancho de banda, intentos DDoS, métricas del sistema y el código de seguridad que debe comunicar al Técnico.
-- El **Técnico** tiene acceso de solo acción: ejecuta comandos desde una terminal interactiva para enfriar racks, reiniciar servidores, activar firewalls y responder a las alertas que reporta el Monitor.
+Monitor: Ve la temperatura de los racks, el consumo de ancho de banda y los intentos de intrusión DDoS.
+
+Técnico: Controla la potencia de los aires acondicionados, reinicia servidores y activa firewalls de emergencia.
 
 ---
 
