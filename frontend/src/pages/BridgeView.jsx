@@ -62,7 +62,8 @@ export default function BridgeView() {
     if (!command) return
     setHistory(h => [command, ...h].slice(0, 50))
     setHistIdx(-1)
-    sendCommand(command)
+    // Pasamos el comando Y el código de seguridad (secInput) al store
+    sendCommand(command, secInput)
     setInput('')
     inputRef.current?.focus()
   }
@@ -134,13 +135,13 @@ export default function BridgeView() {
           </div>
 
       
-          <div className="p-3" style={{ borderTop: '1px solid #0f3a4a' }}>
-            <div className="font-mono text-xs text-cyan-900 tracking-widest mb-2">ESTADO RACKS</div>
-            <div className="space-y-1">
+          <div className="p-2" style={{ borderTop: '1px solid #0f3a4a', background: 'rgba(5,10,14,0.3)' }}>
+            <div className="font-mono text-[9px] text-cyan-900 tracking-widest mb-1 px-1">ESTADO RACKS</div>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 px-1">
               {metrics.temperature.map((r, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="font-mono text-xs text-gray-700 w-8">R-{r.rack}</span>
-                  <div className="flex-1 h-1 rounded-full" style={{ background: '#0f2030' }}>
+                <div key={i} className="flex items-center gap-1.5">
+                  <span className="font-mono text-[9px] text-gray-700 w-6">{r.rack.replace('RACK-', '')}</span>
+                  <div className="flex-1 h-0.5 rounded-full" style={{ background: '#0f2030' }}>
                     <div
                       className="h-full rounded-full transition-all duration-700"
                       style={{
@@ -150,7 +151,7 @@ export default function BridgeView() {
                     />
                   </div>
                   <span
-                    className="font-mono text-xs w-8 text-right"
+                    className="font-mono text-[9px] w-6 text-right"
                     style={{ color: r.value >= 70 ? '#ff4444' : r.value >= 55 ? '#ffaa00' : '#22d3ee' }}
                   >
                     {r.value}°

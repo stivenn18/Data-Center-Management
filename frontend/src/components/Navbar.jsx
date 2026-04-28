@@ -4,11 +4,10 @@ import useCrisisStore from '../store/useCrisisStore'
 
 export default function Navbar() {
   const navigate = useNavigate()
-  const { player, connected, systemStatus, disconnectSocket, setPlayer } = useCrisisStore()
+  const { player, connected, systemStatus, abortMission } = useCrisisStore()
 
   const handleAbort = () => {
-    disconnectSocket()
-    setPlayer(null, null)
+    abortMission()
     navigate('/')
   }
 

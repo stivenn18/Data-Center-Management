@@ -80,6 +80,7 @@ export default function MonitorView() {
                   <XAxis
                     dataKey="rack"
                     tick={{ fill: '#4a7a8a', fontSize: 10, fontFamily: 'Share Tech Mono' }}
+                    tickFormatter={(v) => v.replace('RACK-', '')}
                   />
                   <YAxis
                     domain={[0, 80]}
@@ -176,25 +177,44 @@ export default function MonitorView() {
           <div className="panel-border rounded-lg overflow-hidden" style={{ background: '#080f14' }}>
             <PanelHeader title="CÓDIGO DE SEGURIDAD" icon="⬡" />
             <div className="p-5 flex flex-col items-center justify-center" style={{ minHeight: 140 }}>
-              <div className="font-mono text-xs text-cyan-800 tracking-widest mb-3 uppercase">
-                — Comunicar al Técnico —
-              </div>
-              <div
-                className="font-mono text-2xl font-bold tracking-widest text-center mb-4"
-                style={{
-                  color: '#22d3ee',
-                  letterSpacing: '0.25em',
-                  textShadow: '0 0 15px #06b6d4, 0 0 30px #06b6d4',
-                }}
-              >
-                {securityCode}
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                <span className="font-mono text-xs text-green-700">CÓDIGO ACTIVO</span>
-              </div>
-              <div className="mt-3 font-mono text-xs text-cyan-900">
-                FIREWALL: <span className="text-green-500">{metrics.firewallStatus}</span>
+              {(securityCode && securityCode !== '----') || systemStatus !== 'NOMINAL' ? (
+                <>
+                  <div className="font-mono text-[10px] text-red-500 tracking-[0.3em] mb-3 uppercase animate-pulse">
+                    ⚠ AUTORIZACIÓN REQUERIDA ⚠
+                  </div>
+                  <div
+                    className="font-mono text-4xl font-bold tracking-[0.4em] text-center mb-4"
+                    style={{
+                      color: '#ff4444',
+                      textShadow: '0 0 20px #ff4444, 0 0 40px rgba(255,68,68,0.5)',
+                    }}
+                  >
+                    {securityCode === '----' ? '....' : securityCode}
+                  </div>
+                  <div className="flex items-center gap-2 py-1 px-3 rounded-full border border-red-500/30 bg-red-500/5">
+                    <span className="inline-block w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                    <span className="font-mono text-[10px] font-bold text-red-500">CÓDIGO DE CRISIS ACTIVO</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="font-mono text-[10px] text-cyan-900 tracking-widest mb-3 uppercase">
+                    SISTEMA PROTEGIDO
+                  </div>
+                  <div className="font-mono text-2xl font-bold tracking-widest text-cyan-950/30 mb-4">
+                    LOCKED
+                  </div>
+                  <div className="flex items-center gap-2 opacity-50">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-900" />
+                    <span className="font-mono text-[10px] text-cyan-900 uppercase">Sin Alertas Activas</span>
+                  </div>
+                </>
+              )}
+              <div className="mt-4 pt-3 w-full border-t border-cyan-900/20 font-mono text-[10px] flex justify-between items-center">
+                <span className="text-cyan-800">FIREWALL:</span>
+                <span className={metrics.firewallStatus === 'ACTIVE' ? 'text-green-500' : 'text-red-900'}>
+                  {metrics.firewallStatus}
+                </span>
               </div>
             </div>
           </div>
