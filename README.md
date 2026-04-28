@@ -1,4 +1,4 @@
-# 🖥️ Monitoreo de Data Center
+# 🖥️ Gestión de Data Center (Infraestructura Cloud)
 
 Sistema asimétrico de gestión de crisis para Data Centers en tiempo real. Dos roles trabajan en conjunto: el **Monitor** observa las métricas del sistema y el **Técnico** ejecuta los comandos de respuesta. La comunicación entre ambos es vital para resolver la crisis.
 
@@ -15,7 +15,7 @@ Sistema asimétrico de gestión de crisis para Data Centers en tiempo real. Dos 
 
 ## 📖 Descripción
 
-**Monitoreo de Data Center** es una aplicación web multijugador asimétrica donde:
+**Gestión de Data Center** es una aplicación web multijugador asimétrica donde:
 
 - El **Monitor** tiene acceso de solo lectura: ve temperatura de racks, ancho de banda, intentos DDoS, métricas del sistema y el código de seguridad que debe comunicar al Técnico.
 - El **Técnico** tiene acceso de solo acción: ejecuta comandos desde una terminal interactiva para enfriar racks, reiniciar servidores, activar firewalls y responder a las alertas que reporta el Monitor.
@@ -60,7 +60,7 @@ Data-Center-Monitoring/
 │   ├── postcss.config.js
 │   ├── vite.config.js
 │   └── package.json
-└── backend/                        # Servidor Node.js + Socket.io (compañero)
+
 ```
 
 ---
@@ -75,8 +75,8 @@ Data-Center-Monitoring/
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/Data-Center-Monitoring.git
-cd Data-Center-Monitoring
+git clone https://github.com/stivenn18/Data-Center-Management
+cd Data-Center-Management
 ```
 
 ### 2. Instalar dependencias del frontend
@@ -86,12 +86,6 @@ cd frontend
 npm install
 ```
 
-### 3. Instalar dependencias del backend
-
-```bash
-cd ../backend
-npm install
-```
 
 ---
 
@@ -106,10 +100,9 @@ cp .env.example .env
 Contenido del `.env`:
 
 ```env
-VITE_SOCKET_URL=http://localhost:3000
+VITE_SOCKET_URL=http://localhost:3001
 ```
 
-> Cambia el puerto `3000` si tu compañero de backend usa uno diferente.
 
 ---
 
@@ -124,12 +117,7 @@ npm run dev
 
 La aplicación estará disponible en: [http://localhost:5173](http://localhost:5173)
 
-### Levantar el backend (en otra terminal)
 
-```bash
-cd backend
-npm run dev
-```
 
 ### Scripts disponibles
 
